@@ -4,6 +4,7 @@ def main():
     print("OCR 프로젝트 시작")
 
     # 입력 이미지 경로 설정 (사용자 환경에 맞게 수정)
+    # 테스트 데이터를 구하여 경로를 작성
     img_path = "D:/test_data.PNG"   # 예: "data/test_image.jpg"
 
     try:

@@ -14,6 +14,7 @@ pip install paddlepaddle-gpu
 ```
 
 ## 📁프로젝트 구조
+```
 ocr-project/
 ├─ .venv/                 # 가상환경 (OS별로 별도 생성)
 ├─ main_ocr.py            # OCR 코드 스크립트
@@ -22,6 +23,7 @@ ocr-project/
 ├─ uv.lock                # 패키지 버전 고정
 ├─ README.md              # 이 파일
 └─ ... (기타 코드)
+```
 
 ## ⚙️사전 준비
 | 항목                 | 내용                                           |

@@ -1,4 +1,4 @@
-# OCR 프로젝트 - 2025/11/10
+# OCR 프로젝트 - 교육청 적용 POC
 
 ## PaddleOCR 활용 
 https://github.com/PaddlePaddle/PaddleOCR/blob/main/readme/README_ko.md
@@ -30,8 +30,6 @@ ocr-project/
 | ------------------ | -------------------------------------------- |
 | Python 버전          | 3.11 이상                                      |
 | 필수 도구              | [uv](https://github.com/astral-sh/uv) 또는 pip |
-| Git                | (선택) 클론용                                     |
-| Visual Studio Code | (선택) 실행 및 디버깅용                               |
 
 
 ## 🪟VM(가상 환경 설정)

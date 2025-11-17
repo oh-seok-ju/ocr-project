@@ -94,3 +94,6 @@ which python   /   python3
 uv pip list 
 ```
 --- 
+## 기타
+** pdf2image 관련**
+ https://m.blog.naver.com/chandong83/222262274082

@@ -22,16 +22,7 @@ def extract_final_amount(text_list):
         "실제 총 결제 금액"
     ]
 
-
-    # # 인덱스 순서 그대로 검색
-    # for i, text in enumerate(text_list):
-    #     low = text.lower()
-    #     # 키워드 리스트를 돌면서 k.lower() in low가 하나라도 True 면 바로 뒤에 숫자를 찾으러 다음 for 수행
-    #     if any(k.lower() in low for k in keywords):
-    #         # 바로 뒤의 숫자를 찾음
-    #         for j in range(i, min(i+3, len(text_list))):
-    #             if money_pattern.search(text_list[j]):
-    #                 return money_pattern.search(text_list[j]).group()
+    candidates = []  # 금액을 모을 리스트
 
     # 인덱스 순서대로 검색
     for i, text in enumerate(text_list):
@@ -41,11 +32,19 @@ def extract_final_amount(text_list):
         # 키워드 매칭 (공백 제거 버전 포함)
         if any(k.replace(" ", "").lower() in normalized for k in keywords):
 
-            # 키워드 바로 근처 1~2줄 범위에서 금액 탐색
+            # 이 키워드 주변 1~2줄 범위에서 금액 탐색
             for j in range(i, min(i + 3, len(text_list))):
-                m = money_pattern.search(str(text_list[j]))
-                if m:
-                    return m.group()
+                line = str(text_list[j])
+                for m in money_pattern.finditer(line):
+                    try:
+                        value = int(m.group().replace(",", ""))
+                    except ValueError:
+                        continue
+                    candidates.append(value)
 
-    # 키워드 없으면 금액 없음
-    return None
+    # 키워드 자체가 하나도 없거나, 주변에서 금액을 못 찾았으면 없음
+    if not candidates:
+        return None
+
+    # 후보들 중 가장 큰 금액을 최종값으로
+    return f"{max(candidates):,d}"

@@ -110,11 +110,6 @@ class EduOCR:
         if not self.in_img or Path(self.in_img).suffix.lower() != ".pdf":
             raise ValueError("유효한 PDF(.pdf) 경로가 설정되지 않았습니다.")
         
-        # 추 후 커스텀
-        # ocr_pdf = PPStructureV3(
-        #     lang=self.lang, 
-        #     ocr_version="PP-OCRv5"
-        # )
         """
         추가 기능
         # use_doc_orientation_classify= True/False  

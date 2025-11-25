@@ -139,6 +139,7 @@ class EduOCR:
 
         all_results = []
         page_summaries = []   # 페이지별 텍스트/금액 요약 저장용
+        page_images = [] # Streamlit에서 보여줄 이미지 리스트
 
         for page_idx, page in enumerate(pages, start=1):
             print(f"\n=== {page_idx} 페이지 OCR 시작 ===")
@@ -208,7 +209,10 @@ class EduOCR:
             })
 
             # 그리기 나중에 필요하면 저장도 생각
-            page_draw.show()
+            # page_draw.show()
+
+            # streamlit에서 사용할 이미지 저장
+            page_images.append(page_draw)
 
 
         # 페이지별 요약 출력
@@ -224,4 +228,4 @@ class EduOCR:
 
         # 여기서는 '전체 최종 금액'은 자동으로 하나만 고르지 않고,
         # 호출하는 쪽에서 page_summaries를 보고 선택하게 하는 흐름으로 둠.
-        # return page_summaries
+        return page_summaries, page_images

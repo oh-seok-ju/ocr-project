@@ -132,11 +132,15 @@ class EduOCR:
 
         from pdf2image import convert_from_path
 
-        # === 여기부터 PDF -> 이미지 변환 ===
+        # === 여기부터 PDF -> 이미지 변환 !!!!!!!!!!!!!!!서버에 올라가면 그때부터 사용안함  ===
         POPPLER_PATH = r"D:\poppler-25.07.0\Library\bin"  # ← 실제 poppler 설치 경로로 변경
         # dpi=150,
         pages = convert_from_path(self.in_img, poppler_path=POPPLER_PATH)
 
+        # 서버(우분투) 올렸을때 용 위에 두개 주석 하고 아래 사용
+        # pages = convert_from_path(self.in_img)
+        #######################################################3
+        
         all_results = []
         page_summaries = []   # 페이지별 텍스트/금액 요약 저장용
         page_images = [] # Streamlit에서 보여줄 이미지 리스트

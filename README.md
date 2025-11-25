@@ -1,5 +1,6 @@
 # OCR 프로젝트 - 교육청 적용 POC
 
+
 ## PaddleOCR 활용 
 https://github.com/PaddlePaddle/PaddleOCR/blob/main/readme/README_ko.md
 
@@ -94,6 +95,26 @@ which python   /   python3
 uv pip list 
 ```
 --- 
+
+## 우분투 서버에서 실행할때 가상환경 접속 및 streamlit 서버 실행(현 서버) tmux 사용
+
+```bash
+
+tmux new -s streamlit // 세션 분리 생성 
+
+tmux ls // 기존 세션 확인
+
+tmux attach -t streamlit  // 기존 세션 접근
+
+tmux kill-session -t streamlit // 세션 종료
+
+Ctrl + B → 𝄽 → D  // tumx 세션에서 빠져 나오기 
+
+# 세션 내부에서 streamlit 서버 기동
+streamlit run app2.py --server.address 0.0.0.0 --server.port <포트번호>
+
+```
+
 ## 기타
 ** pdf2image 관련**
  https://m.blog.naver.com/chandong83/222262274082

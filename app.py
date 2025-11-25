@@ -3,7 +3,7 @@ import tempfile
 from main_ocr import EduOCR
 
 def main():
-    st.title("[OCR] 교육청 명세서 OCR")
+    st.title("[OCR] 교육청 명세서 POC Test")
     st.caption("[OCR] PDF 명세서에서 페이지별 최종 금액 후보를 추출합니다.")
 
     lang = "korean"

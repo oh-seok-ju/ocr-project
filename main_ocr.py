@@ -1,4 +1,4 @@
-from paddleocr import PaddleOCR, PPStructureV3
+from paddleocr import PaddleOCR
 from PIL import Image, ImageDraw, ImageFont
 import numpy as np
 from pathlib import Path
@@ -36,9 +36,10 @@ class EduOCR:
         # ==================================================
         ocr_image = PaddleOCR(
             lang=self.lang,
-            ocr_version="PP-OCRv5", # 또는 "PP-OCRv3(쓰래기..)", "PP-OCRv4(한글 x)"
+            ocr_version="PP-OCRv4", # 또는 "PP-OCRv3(쓰래기..)", "PP-OCRv4"
             text_det_unclip_ratio=0.5,   # 박스 확장 줄이기
             text_det_box_thresh=0.6,     # 낮은 신뢰도 박스 제거
+            use_gpu=True
         )
 
         result = ocr_image.ocr(self.in_img)
@@ -123,22 +124,23 @@ class EduOCR:
         """
         ocr_image = PaddleOCR(
             lang=self.lang,
-            ocr_version="PP-OCRv5", # 또는 "PP-OCRv3(쓰래기..)", "PP-OCRv4(한글 x)"
+            ocr_version="PP-OCRv4", # 또는 "PP-OCRv3(쓰래기..)"
             text_det_box_thresh=0.6,     # 낮은 신뢰도 박스 제거
             use_doc_orientation_classify=False,  # 문서 기울기(orientation) 자동 판단 모델 OFF
             use_doc_unwarping=False,            # 문서 펼침/왜곡 보정(unwarping) 모델 OFF
             use_textline_orientation=False,      # 텍스트 라인 방향 판단 모델 OFF
+            use_gpu=True
         )
 
         from pdf2image import convert_from_path
 
         # === 여기부터 PDF -> 이미지 변환 !!!!!!!!!!!!!!!서버에 올라가면 그때부터 사용안함  ===
-        POPPLER_PATH = r"D:\poppler-25.07.0\Library\bin"  # ← 실제 poppler 설치 경로로 변경
-        # dpi=150,
-        pages = convert_from_path(self.in_img, poppler_path=POPPLER_PATH)
+        # POPPLER_PATH = r"D:\poppler-25.07.0\Library\bin"  # ← 실제 poppler 설치 경로로 변경
+        # # dpi=150,
+        # pages = convert_from_path(self.in_img, poppler_path=POPPLER_PATH)
 
         # 서버(우분투) 올렸을때 용 위에 두개 주석 하고 아래 사용
-        # pages = convert_from_path(self.in_img)
+        pages = convert_from_path(self.in_img)
         #######################################################3
         
         all_results = []

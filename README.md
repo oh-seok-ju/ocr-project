@@ -100,13 +100,13 @@ uv pip list
 
 ```bash
 
-tmux new -s streamlit // 세션 분리 생성 
+tmux new -s <세션 이름> // 세션 분리 생성 
 
 tmux ls // 기존 세션 확인
 
-tmux attach -t streamlit  // 기존 세션 접근
+tmux attach -t <세션 이름>  // 기존 세션 접근
 
-tmux kill-session -t streamlit // 세션 종료
+tmux kill-session -t <세션 이름> // 세션 종료
 
 Ctrl + B → 𝄽 → D  // tumx 세션에서 빠져 나오기 
 

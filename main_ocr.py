@@ -167,9 +167,20 @@ class EduOCR:
 
             # simple_ocr와 동일한 dict 구조일 경우
             res = result[0]
-            boxes = res.get("rec_boxes", [])
-            texts = res.get("rec_texts", [])
-            scores = res.get("rec_scores", [])
+            # --- ★ 여기서 형식 분기 처리 ★ ---
+            if isinstance(res, dict):
+                # 예전 네 코드가 기대하던 형태 (혹시 다른 버전에서도 동작하게)
+                boxes = res.get("rec_boxes", [])
+                texts = res.get("rec_texts", [])
+                scores = res.get("rec_scores", [])
+            else:
+                # PaddleOCR 2.7.x 기본 리턴 형식: list
+                # res: [ [box, (text, score)], ... ]
+                lines = res
+                boxes = [np.array(line[0]) for line in lines]
+                texts = [line[1][0] for line in lines]
+                scores = [line[1][1] for line in lines]
+            # -----------------------------------
 
             page_draw = page.convert("RGB")
             draw = ImageDraw.Draw(page_draw)
@@ -184,9 +195,9 @@ class EduOCR:
                 #  x_max, y_max 우하단
                 if box.ndim == 1 and len(box) == 4:
                     x_min, y_min, x_max, y_max = box
-                # else:
-                #     x_min, y_min = box[:, 0].min(), box[:, 1].min()
-                #     x_max, y_max = box[:, 0].max(), box[:, 1].max()
+                else:
+                    x_min, y_min = box[:, 0].min(), box[:, 1].min()
+                    x_max, y_max = box[:, 0].max(), box[:, 1].max()
 
                 draw.rectangle([(x_min, y_min), (x_max , y_max)], outline=(0, 255, 0), width=2)
                 draw.text((x_min, max(y_min - 20, 0)), f"{text}", font=get_font(15), fill=(255, 0, 0))

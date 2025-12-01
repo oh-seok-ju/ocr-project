@@ -5,7 +5,7 @@ from pathlib import Path
 
 # 제작
 from util.image_util import get_font, resize_if_small
-from util.pay_util import extract_final_amount
+from util.pay_util import extract_final_amount, extract_final_v4_amount
 
 # import os
 # import json
@@ -217,8 +217,9 @@ class EduOCR:
 
 
             # 현재 페이지에서의 후보 금액 추출
-            page_amount = extract_final_amount(page_texts) if page_texts else None
-
+            # 키워드 기반 띄어쓰기 포함된 버전 
+            page_amount = extract_final_v4_amount(page_texts) if page_texts else None
+            
             page_summaries.append({
                 "page": page_idx,
                 "amount": page_amount,

@@ -1,4 +1,4 @@
-# OCR 프로젝트 - 교육청 적용 POC - 3.41번 서버 gpu 활용 버전으로 수정
+# OCR 프로젝트 - 교육청 적용 POC - 41번 서버 GPU 활용 버전으로 수정
 
 
 ## PaddleOCR 활용 
@@ -9,7 +9,7 @@ https://github.com/PaddlePaddle/PaddleOCR/blob/main/readme/README_ko.md
 pip install paddlepaddle
 pip install paddleocr
 
-# **gpu**
+# **gpu 2.XX 버전 사용**
 pip install paddlepaddle-gpu
 
 ```
@@ -18,6 +18,8 @@ pip install paddlepaddle-gpu
 ```
 ocr-project/
 ├─ .venv/                 # 가상환경 (OS별로 별도 생성)
+├─ util                   # 유틸리티 함수 폴더 (image_util.py/pay_util.py)
+├─ font                   # UI 활용 폰트 폴더
 ├─ main_ocr.py            # OCR 코드 스크립트
 ├─ main.py                # *실행 스크립트
 ├─ pyproject.toml         # uv 설정 파일
@@ -29,8 +31,7 @@ ocr-project/
 ## ⚙️사전 준비
 | 항목                 | 내용                                           |
 | ------------------ | -------------------------------------------- |
-| Python 버전          | 3.11 이상                                      |
-| 필수 도구              | [uv](https://github.com/astral-sh/uv) 또는 pip |
+| Python 버전          | 3.10 이상 (toml 확인!)                                   |
 
 
 ## 🪟VM(가상 환경 설정)
@@ -111,7 +112,7 @@ tmux kill-session -t <세션 이름> // 세션 종료
 Ctrl + B → 𝄽 → D  // tumx 세션에서 빠져 나오기 
 
 # 세션 내부에서 streamlit 서버 기동
-streamlit run app2.py --server.address 0.0.0.0 --server.port <포트번호>
+streamlit run app.py --server.address 0.0.0.0 --server.port <포트번호>
 
 ```
 
